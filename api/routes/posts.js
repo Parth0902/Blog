@@ -1,12 +1,12 @@
 const express=require('express')
-const addPost=require('../controllers/post.js')
+const {getPost,getPosts,addPost,deletePost,updatePost}=require('../controllers/post.js')
 const router=express.Router();
 
-router.get('/test',(req,res)=>
-{
-    res.json('Test successfull (0)_(0)')
-})
-
+router.get("/",getPosts)
+router.get("/:id",getPosts)
+router.post("/",addPost)
+router.delete("/:id",deletePost)
+router.post("/:id",updatePost)
 
 router.get('/add',addPost);
 
