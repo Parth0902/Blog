@@ -36,28 +36,16 @@ import axios from 'axios'
     
 
 const Home = () => {
-
   const[posts,setPosts]=useState([]);
- 
   const cat=useLocation().search
-  console.log(cat);
- 
 
   useEffect(()=>
   {
-    
     const fetchAll= async ()=>
     {
       try{
-  
-
         const res= await axios.get(`http://localhost:8800/api/posts${cat}`);
         setPosts(res.data)
-        console.log(res.data[0].id)
-        console.log(res.data[0].title)
-        console.log(res.data[0].image)
-        console.log(res.data[0].desc)
-        
       }
       catch(err)
       {
@@ -82,7 +70,7 @@ const Home = () => {
          <h1>{post.title}</h1>
        </Link>
          <p>{post.desc}</p>
-         <button>Read More</button>
+         <button><Link to={`/post/${post.id}`}>Read More</Link></button>
       
      </div>
 

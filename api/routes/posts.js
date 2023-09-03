@@ -3,7 +3,7 @@ const {getPost,getPosts,addPost,deletePost,updatePost}=require('../controllers/p
 const router=express.Router();
 
 router.get("/",getPosts)
-router.get("/:id",getPosts)
+router.get("/:id",getPost)
 router.post("/",addPost)
 router.delete("/:id",deletePost)
 router.post("/:id",updatePost)

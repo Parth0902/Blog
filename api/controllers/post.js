@@ -1,4 +1,5 @@
       const db= require("../db.js")
+      const jwt=require("jsonwebtoken");
 
       const getPosts=(req,res)=>
         {
@@ -16,8 +17,18 @@
 
 
         const getPost=(req,res)=>
-        {
-            res.json('Added a post')
+        {   
+            const q="SELECT p.id,u.username ,p.title,p.desc,p.image,p.cat,p.date FROM USER u INNER JOIN POSTS p ON u.id=p.uid WHERE p.id= ?";
+            
+            db.query(q,[req.params.id],(err,data)=>
+            {
+                if(err){
+                    console.log(err);
+                    return res.json('database error');
+                }
+                return res.json(data[0]);
+            })
+           
         }
 
 
@@ -29,7 +40,25 @@
 
         const deletePost=(req,res)=>
         {
-            res.json('Added a post')
+            const token= req;
+            console.log(token);
+            if(!token){
+                res.json("Not authenticated");
+            }
+            
+            jwt.verify(token,"jwtkey",(err,userInfo)=>
+            {
+                if(err) return console.log(err)
+
+                const postId=req.params.id;
+                const q="DELETE FROM posts WHERE `id` =? AND `uid`=?";
+                db.query(q,[postId,userInfo.id],(err,data)=>
+                {
+                    if(err)console.log("database error");
+                    console.log('your post has been deleted!');
+                })
+            })
+          
         }
 
 

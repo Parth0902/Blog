@@ -184,7 +184,7 @@ footer span{
     object-fit: cover;
 }
 
-.content{
+.post .content{
     flex: 3;
     display:flex;
     flex-direction: column;
