@@ -9,8 +9,7 @@ import {AuthContext} from '../context/authContext'
 
 const Single = () => {
   const [post, setPost] = useState([]);
-  const {currentUser}= useContext(AuthContext)
-
+  const {currentUser}= useContext(AuthContext)         
   const cat = useLocation().search;
   console.log(cat);
   const location =useLocation();
@@ -36,8 +35,8 @@ const Single = () => {
   const handleDelete=async ()=>
   {
     try{
-      await axios.delete(`http://localhost:8800/api/posts/${postId}`);
-      navigate("/");
+      await axios.post(`http://localhost:8800/api/posts/${postId}`,currentUser);
+      // navigate("/");
 
     }catch(err){
       console.log(err);

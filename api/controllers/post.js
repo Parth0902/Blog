@@ -40,24 +40,24 @@
 
         const deletePost=(req,res)=>
         {
-            const token= req;
-            console.log(token);
-            if(!token){
-                res.json("Not authenticated");
-            }
+             console.log(req.body);
+             console.log(req.params);
+            // if(!token){
+            //     res.json("Not authenticated");
+            // }
             
-            jwt.verify(token,"jwtkey",(err,userInfo)=>
-            {
-                if(err) return console.log(err)
+            // jwt.verify(token,"jwtkey",(err,userInfo)=>
+            // {
+            //     if(err) return console.log(err)
 
-                const postId=req.params.id;
-                const q="DELETE FROM posts WHERE `id` =? AND `uid`=?";
-                db.query(q,[postId,userInfo.id],(err,data)=>
-                {
-                    if(err)console.log("database error");
-                    console.log('your post has been deleted!');
-                })
-            })
+            //     const postId=req.params.id;
+            //     const q="DELETE FROM posts WHERE `id` =? AND `uid`=?";
+            //     db.query(q,[postId,userInfo.id],(err,data)=>
+            //     {
+            //         if(err)console.log("database error");
+            //         console.log('your post has been deleted!');
+            //     })
+            // })
           
         }
 

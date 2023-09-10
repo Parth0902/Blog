@@ -42,6 +42,7 @@ const register=(req,res)=>
     })
 }
 
+
 const login=(req,res)=>
 {
    const q="SELECT * FROM user WHERE username=?";
@@ -64,14 +65,11 @@ const login=(req,res)=>
        return res.status(400).json('UserName or passord is incorrect')
         
        const token=JWT.sign({id:data[0].id},'jwtkey');
-       const{password,...other}=data[0]
-
-       res.cookie("access_token",token,{httpOnly:true,}).status(200).json(other);
-      
+       const{password,...other}=data[0];
+       console.log(token);
+       res.cookie('access_token',token,{httponly:true}).status(200).json({user:other,token:token});
 
    });
-
-
 };
 
 const logout = (req, res) => {

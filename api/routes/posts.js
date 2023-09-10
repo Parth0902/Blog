@@ -5,7 +5,7 @@ const router=express.Router();
 router.get("/",getPosts)
 router.get("/:id",getPost)
 router.post("/",addPost)
-router.delete("/:id",deletePost)
+router.post("/:id",deletePost)
 router.post("/:id",updatePost)
 
 router.get('/add',addPost);
