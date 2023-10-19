@@ -11,12 +11,9 @@ const Single = () => {
   const [post, setPost] = useState([]);
   const {currentUser}= useContext(AuthContext)         
   const cat = useLocation().search;
-  console.log(cat);
   const location =useLocation();
   const navigate=useNavigate();
   const postId=location.pathname.split('/')[2];
-
-
   useEffect(() => {
     const fetchAll = async () => {
       try {
@@ -35,8 +32,15 @@ const Single = () => {
   const handleDelete=async ()=>
   {
     try{
-      await axios.post(`http://localhost:8800/api/posts/${postId}`,currentUser);
-      // navigate("/");
+      const token= sessionStorage.getItem('token');
+      if(token){
+        const res=await axios.post(`http://localhost:8800/api/posts/${postId}`,{currentUser,token});
+        alert(res.data);
+      }
+      else {
+        alert('Session expired please login again');
+      }
+     
 
     }catch(err){
       console.log(err);
@@ -48,6 +52,8 @@ const Single = () => {
       <div className="content">
           <img
             src={post?.image}
+
+            
             alt=""
           />
 
@@ -61,7 +67,7 @@ const Single = () => {
 
               { currentUser.username=== post.username &&
               <div className="edit">
-                <Link to={`/write?edit=2`}>
+                <Link to={`/write?edit=2`} state={post}>
                   <i class="bx bx-edit"></i>
                 </Link>
 
@@ -78,7 +84,7 @@ const Single = () => {
       
       </div>
       <div className="menu">
-        <Menue />
+        <Menue cat={post.cat}/>
       </div>
     </div>
   );

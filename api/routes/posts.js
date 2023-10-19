@@ -4,9 +4,9 @@ const router=express.Router();
 
 router.get("/",getPosts)
 router.get("/:id",getPost)
-router.post("/",addPost)
+router.post("/add",addPost)
 router.post("/:id",deletePost)
-router.post("/:id",updatePost)
+router.put("/:id",updatePost)
 
 router.get('/add',addPost);
 

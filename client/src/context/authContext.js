@@ -5,7 +5,7 @@ export const AuthContext=createContext();
 
 export const AUthcontextProvider=({children})=>
 {
-    const [currentUser,setCurrentUser]=useState(JSON.parse(localStorage.getItem("user") || null));
+    const [currentUser,setCurrentUser]=useState(JSON.parse(sessionStorage.getItem("user") || null));
     const [Token,setToken]=useState("");
      const login= async(inputs)=>
      {
@@ -23,8 +23,8 @@ export const AUthcontextProvider=({children})=>
 
      useEffect(()=>
      {
-        localStorage.setItem("user",JSON.stringify(currentUser));
-        localStorage.setItem("token",Token);
+        sessionStorage.setItem("user",JSON.stringify(currentUser));
+        sessionStorage.setItem("token",Token);
      },[currentUser,Token]);
 
      return (
