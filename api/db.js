@@ -1,4 +1,4 @@
-// here we are doing the connection of the server woth the mysql database
+// here we are doing the connection of the server with the mysql database
 const Mysql=require('mysql')
 
 const db=Mysql.createConnection({
